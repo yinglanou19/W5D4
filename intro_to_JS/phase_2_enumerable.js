@@ -13,22 +13,42 @@ Array.prototype.myMap = function (callback) {
     return res;
 };
 
+Array.prototype.myMapWithClosure = function (calling) {
+    let res = [];
+    this.myEach(function(ele) {
+        res.push(calling(ele));
+    });
+};
+
+
+
+Array.prototype.myMapWithClosure = function (calling) {
+    let res = [];
+
+    const myCallback = el => res.push(calling(el));
+    this.myEach(myCallback);
+    
+// another way to code this! 
+    // this.myEach(function (ele) {
+    //     res.push(calling(ele));
+    // });
+};
 
 
 
 Array.prototype.myReduce = function(callback, inititalValue) {
-    let i;
+    let x;
     let acc;
     if (inititalValue){
         acc = inititalValue;
-        i = 0;
+        x = 0;
     }
     else {
         acc = this[0];
-        i = 1;
+        x = 1;
     }
-    
-    for (; i<this.length; i++){
+
+    for (let i = x; i<this.length; i++){
         callback(acc, this[i]);
     }
     return acc;
@@ -38,23 +58,4 @@ Array.prototype.myReduce = function(callback, inititalValue) {
 
 
 
-
-// Array.prototype.myReduce = function (callback, inititalValue) {
-//     let acc; 
-//     let i;
-//     if (inititalValue) {
-//         acc = inititalValue;
-//         i = 0;
-//     }
-//     else{
-//         acc = this[0];
-//         i = 1;
-//     }
-
-//     for (; i < this.length; i++) {
-//         acc = callback(acc, this[i]);
-//     }
-
-//     return acc;
-// };
 
